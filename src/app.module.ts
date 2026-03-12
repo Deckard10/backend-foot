@@ -31,7 +31,7 @@ import { MailModule } from './services/mail/mail.module';
       ssl: process.env.MYSQL_SSL === "true",
       extra: {
         ssl:
-          process.env.MYSQL === "true"
+          process.env.MYSQL_SSL === "true"
             ? {
               rejectUnauthorized: false,
             }
