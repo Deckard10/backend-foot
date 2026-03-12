@@ -7,26 +7,6 @@ import cookieParser from 'cookie-parser';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const corsOriginsFromEnv = [
-    process.env.CORS_ORIGINS,
-    process.env.FRONTEND_URL,
-  ]
-    .filter(Boolean)
-    .flatMap((value) =>
-      value!
-        .split(',')
-        .map((origin) => origin.trim())
-        .filter(Boolean)
-    );
-
-  const allowedOrigins = Array.from(
-    new Set([
-      ...corsOriginsFromEnv,
-      'https://footdark.netlify.app',
-      'http://localhost:4200',
-    ])
-  );
-
   app.setGlobalPrefix('api/v1');
   app.use(cookieParser());
 
@@ -40,14 +20,11 @@ async function bootstrap() {
 
 
   app.enableCors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-
-      return callback(new Error(`Origin not allowed by CORS: ${origin}`), false);
-    },
-    credentials: true,
+    origin: [
+      process.env.FRONTEND_URL,
+      "http://localhost:4200",
+    ],
+    credentials: true, 
   });
 
   const config = new DocumentBuilder()
