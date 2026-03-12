@@ -43,11 +43,12 @@ import { MailModule } from './services/mail/mail.module';
       transport: {
         host: process.env.SMTP_HOST,
         port: Number(process.env.SMTP_PORT),
-        secure: false, 
+        secure: false, // cambiaa true si usas SSL,
         auth: {
           user: process.env.SMTP_USER,
           pass: process.env.SMTP_PASS,
         },
+        ...({ family: 4 } as any),
         tls: {
           rejectUnauthorized: false,
         }
