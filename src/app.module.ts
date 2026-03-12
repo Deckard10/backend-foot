@@ -21,17 +21,17 @@ import { MailModule } from './services/mail/mail.module';
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: process.env.MYSQLHOST,
-      port: Number(process.env.MYSQLPORT),
-      username: process.env.MYSQLUSER,
-      password: process.env.MYSQLPASSWORD,
-      database: process.env.MYSQLDATABASE,
+      host: process.env.DB_HOST,
+      port: Number(process.env.DB_PORT),
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
       autoLoadEntities: true,
       synchronize: true,
-      ssl: process.env.MYSQL_SSL === "true",
+      ssl: process.env.DB_SSL === "true",
       extra: {
         ssl:
-          process.env.MYSQL_SSL === "true"
+          process.env.DB_SSL === "true"
             ? {
               rejectUnauthorized: false,
             }
