@@ -21,11 +21,11 @@ import { MailModule } from './services/mail/mail.module';
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: process.env.MYSQL_HOST,
-      port: Number(process.env.MYSQL_PORT),
-      username: process.env.MYSQL_USERNAME,
-      password: process.env.MYSQL_PASSWORD,
-      database: process.env.MYSQL_DATABASE,
+      host: process.env.MYSQLHOST,
+      port: Number(process.env.MYSQLPORT),
+      username: process.env.MYSQLUSER,
+      password: process.env.MYSQLPASSWORD,
+      database: process.env.MYSQLDATABASE,
       autoLoadEntities: true,
       synchronize: true,
       ssl: process.env.MYSQL_SSL === "true",
@@ -38,6 +38,7 @@ import { MailModule } from './services/mail/mail.module';
             : null,
       },
     }),
+    
     MailerModule.forRoot({
       transport: {
         host: process.env.SMTP_HOST,
@@ -67,4 +68,6 @@ import { MailModule } from './services/mail/mail.module';
   controllers: [],
   providers: [MailService],
 })
-export class AppModule { }
+export class AppModule { 
+  
+}
